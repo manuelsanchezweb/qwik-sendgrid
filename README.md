@@ -1,65 +1,32 @@
-# Qwik City App ⚡️
+<div align="center">
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+<img src="./public/logo.png" width="300" alt="Capcom Advisor" />
 
----
+# Sendgrid with Qwik
 
-## Project Structure
+For more information, please read carefully [@sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail) documentation
 
-This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+</div>
 
-Inside your project, you'll see the following directory structure:
+### 1. Create a Qwik project with `npm create qwik@latest`
 
+### 2. Sign into [https://sendgrid.com/](https://sendgrid.com/) and create an account
+
+### 3. Go to **API Keys** in **Settings** and create a new one for your app
+
+### 4. Verify an email address as in the [Sender Authentication tab](https://app.sendgrid.com/settings/sender_auth/senders) or you will receive a 403 in the response
+
+### 5. Put your API key in a .env file in the root of your repo
+
+```env
+PUBLIC_SENDGRID_API_KEY=<<YOUR_COOL_API_KEY>>
 ```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
+### 6. Install the sendgrid package with `npm install @sendgrid/mail`
 
-- `src/routes`: Provides the directory based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.builder.io/qwikcity/routing/overview/) for more info.
+### 7. Check up what is done in `src/routes/index.tsx` (where the form is) and `src/routes/success/index.tsx` (where the user will land after submiting)
 
-- `src/components`: Recommended directory for components.
+## ❗️ Main Issues
 
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
+Surely you will receive your emails in the SPAM folder. In order to make them land in the proper folder, you will have to do the [Domain Authentication on sendgrid](https://app.sendgrid.com/settings/sender_auth). 
 
-## Add Integrations and deployment
-
-Use the `npm run qwik add` command to add additional integrations. Some examples of integrations include: Cloudflare, Netlify or Express server, and the [Static Site Generator (SSG)](https://qwik.builder.io/qwikcity/guides/static-site-generation/).
-
-```shell
-npm run qwik add # or `yarn qwik add`
-```
-
-## Development
-
-Development mode uses [Vite's development server](https://vitejs.dev/). During development, the `dev` command will server-side render (SSR) the output.
-
-```shell
-npm start # or `yarn start`
-```
-
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
-
-## Preview
-
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to locally preview a production build, and it should not be used as a production server.
-
-```shell
-npm run preview # or `yarn preview`
-```
-
-## Production
-
-The production build will generate client and server modules by running both client and server build commands. Additionally, the build command will use Typescript to run a type check on the source code.
-
-```shell
-npm run build # or `yarn build`
-```
+<img src="./public/domain-authentication.png" alt="domain authentication">
